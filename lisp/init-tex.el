@@ -1,4 +1,4 @@
-;;; emacs + auctex
+;;; emacs + auctex -*- lexical-binding: t -*-
 
 (require-package 'auctex)
 (require-package 'ivy-bibtex)

@@ -1,4 +1,4 @@
-;;; Use deft to manage notes
+;;; Use deft to manage notes -*- lexical-binding: t -*-
 
 (require-package 'deft)
 

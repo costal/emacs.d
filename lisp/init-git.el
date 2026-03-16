@@ -83,7 +83,7 @@
   (interactive (list (read-directory-name "Directory: ")
                      (completing-read "git-svn command: " (git-svn--available-commands) nil t nil nil (git-svn--available-commands))))
   (let* ((default-directory (vc-git-root dir))
-         (compilation-buffer-name-function (lambda (major-mode-name) "*git-svn*")))
+         (compilation-buffer-name-function (lambda (_major-mode-name) "*git-svn*")))
     (compile (concat "git svn " command))))
 
 

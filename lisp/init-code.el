@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (require-package 'code-library)
 
 (setq code-library-directory "~/Dropbox/OrgNotes/CodeLibrary/")

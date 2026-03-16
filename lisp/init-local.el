@@ -1,4 +1,4 @@
-;;; Personal Information
+;;; Personal Information -*- lexical-binding: t -*-
 (setq user-full-name "Chao Liu")
 (setq user-mail-address "chaoliu@seas.upenn.edu")
 

@@ -1,4 +1,4 @@
-;;; blog configuration
+;;; blog configuration -*- lexical-binding: t -*-
 (require-package 'blog-admin)
 
 (require 'blog-admin)

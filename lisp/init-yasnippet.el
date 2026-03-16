@@ -1,4 +1,4 @@
-;;;yasnippet
+;;; yasnippet -*- lexical-binding: t -*-
 (require-package 'yasnippet)
 (require 'yasnippet)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)

@@ -1,4 +1,4 @@
-;;; Gnus Mail Configuration
+;;; Gnus Mail Configuration -*- lexical-binding: t -*-
 
 (require-package 'bbdb)
 

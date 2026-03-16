@@ -21,7 +21,9 @@
     (let ((map (make-sparse-keymap)))
       (define-key map (kbd "t") 'eat-other-window)
       map)
-    "Prefix map for commands that create and manipulate eat buffers.")
+    "Prefix map for commands that create and manipulate eat buffers."
+    :type 'keymap
+    :group 'eat)
   (fset 'sanityinc/eat-map sanityinc/eat-map)
 
   (setq-default eat-term-scrollback-size (* 2 1024 1024))

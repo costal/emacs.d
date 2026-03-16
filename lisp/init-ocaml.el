@@ -35,7 +35,9 @@
 ;; Add my own lightweight ocp-indent reformatter, instead of the clunky upstream package
 (when (maybe-require-package 'reformatter)
   (defcustom ocp-indent-args nil
-    "Arguments for \"ocp-indent\" invocation.")
+    "Arguments for \"ocp-indent\" invocation."
+    :type '(repeat string)
+    :group 'ocaml)
 
   (reformatter-define ocp-indent
     :program "ocp-indent"

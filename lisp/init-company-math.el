@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (require-package 'company-math)
 
 ;;; company-math configuration

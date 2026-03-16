@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (require-package 'arduino-mode)
 (setq ede-arduino-appdir "~/arduino-ide")
 

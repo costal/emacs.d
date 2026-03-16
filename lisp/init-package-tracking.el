@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (require-package 'pkg-info)
 
 ;; record all installed packages with name+version in a file

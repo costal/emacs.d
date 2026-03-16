@@ -1,4 +1,4 @@
-;;; c# configuration
+;;; c# configuration -*- lexical-binding: t -*-
 (require-package 'omnisharp)
 (add-hook 'csharp-mode-hook 'omnisharp-mode)
 

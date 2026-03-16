@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
 
 (require 'rosemacs-config)
@@ -11,7 +12,7 @@
   "Run catkin_make command in DIR."
   (interactive (list (read-directory-name "Directory: ")))
   (let* ((default-directory dir)
-         (compilation-buffer-name-function (lambda (major-mode-name) "*catkin_make*")))
+         (compilation-buffer-name-function (lambda (_major-mode-name) "*catkin_make*")))
     (compile "catkin_make"))
   )
 
@@ -19,7 +20,7 @@
   "Run catkin_make command in DIR."
   (interactive (list (read-directory-name "Directory: ")))
   (let* ((default-directory dir)
-	 (compilation-buffer-name-function (lambda (major-mode-name) "*catkin_make*")))
+	 (compilation-buffer-name-function (lambda (_major-mode-name) "*catkin_make*")))
     (compile "catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ."))
   )
 
@@ -27,14 +28,14 @@
   "Run catkin_make with Debug mode in DIR."
   (interactive (list (read-directory-name "Directory: ")))
   (let* ((default-directory dir)
-         (compilation-buffer-name-function (lambda (major-mode-name) "*catkin_make*")))
+         (compilation-buffer-name-function (lambda (_major-mode-name) "*catkin_make*")))
     (compile "catkin_make -DCMAKE_BUILD_TYPE=Debug")))
 
 (defun ros-catkin-make-release (dir)
   "Run catkin_make --release command in DIR."
   (interactive (list (read-directory-name "Directory: ")))
   (let* ((default-directory dir)
-         (compilation-buffer-name-function (lambda (major-mode-name) "*catkin_make*")))
+         (compilation-buffer-name-function (lambda (_major-mode-name) "*catkin_make*")))
     (compile "catkin_make -DCMAKE_BUILD_TYPE=Release"))
   )
 

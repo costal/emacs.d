@@ -1,4 +1,4 @@
-;;; Basic python mode configuration
+;;; Basic python mode configuration -*- lexical-binding: t -*-
 (setq auto-mode-alist
       (append '(("SConstruct\\'" . python-mode)
 				("SConscript\\'" . python-mode))

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (require-package 'matlab-mode)
 
 (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)

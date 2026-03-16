@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; TODO Default sort order should place [a-z] before punctuation
 
 (setq tab-always-indent 'complete)  ;; use 't when company is disabled
@@ -34,11 +35,11 @@
     (defvar sanityinc/page-break-lines-on-p nil)
     (make-variable-buffer-local 'sanityinc/page-break-lines-on-p)
 
-    (defun sanityinc/page-break-lines-disable (&rest ignore)
+    (defun sanityinc/page-break-lines-disable (&rest _)
       (when (setq sanityinc/page-break-lines-on-p (bound-and-true-p page-break-lines-mode))
         (page-break-lines-mode -1)))
 
-    (defun sanityinc/page-break-lines-maybe-reenable (&rest ignore)
+    (defun sanityinc/page-break-lines-maybe-reenable (&rest _)
       (when sanityinc/page-break-lines-on-p
         (page-break-lines-mode 1)))
 

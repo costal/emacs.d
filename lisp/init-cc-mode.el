@@ -1,4 +1,6 @@
-;;; C/C++ Configuration
+;;; C/C++ Configuration -*- lexical-binding: t -*-
+
+(require 'cl-lib)
 
 ;;; code hide
 ;; (load-library "hideshow")
@@ -96,7 +98,7 @@
 
 ;; remove semantic for python mode and html mode
 (setq semantic-new-buffer-setup-functions
-	  (remove-if (lambda (buffer-setup-function)
+	  (cl-remove-if (lambda (buffer-setup-function)
 				   (member (car buffer-setup-function)
 						   '(python-mode html-mode)))
 				 semantic-new-buffer-setup-functions))

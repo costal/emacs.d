@@ -1,4 +1,4 @@
-;;; multi-term config
+;;; multi-term config -*- lexical-binding: t -*-
 
 (require-package 'multi-term)
 

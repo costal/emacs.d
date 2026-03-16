@@ -3,7 +3,7 @@
 ;;; Code:
 
 (defun sanityinc/display-buffer-full-frame (buffer alist)
-  "If it's not visible, display buffer full-frame, saving the prior window config.
+  "If it\\='s not visible, display buffer full-frame, saving the prior window config.
 The saved config will be restored when the window is quit later.
 BUFFER and ALIST are as for `display-buffer-full-frame'."
   (let ((initial-window-configuration (current-window-configuration)))
@@ -85,7 +85,7 @@ BUFFER and ALIST are as for `display-buffer-full-frame'."
 (if (fboundp 'rename-visited-file)
     (defalias 'rename-this-file-and-buffer 'rename-visited-file)
   (defun rename-this-file-and-buffer (new-name)
-    "Renames both current buffer and file it's visiting to NEW-NAME."
+    "Renames both current buffer and file it\\='s visiting to NEW-NAME."
     (interactive "sNew name: ")
     (let ((name (buffer-name))
           (filename (buffer-file-name)))

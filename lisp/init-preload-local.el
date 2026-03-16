@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (when *is-a-mac*
   ;; (setq ring-bell-function 'ignore);turn the alarm totally off because of the bug in Capitan EI
   )

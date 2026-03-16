@@ -1,4 +1,4 @@
-;;; ssh configuration
+;;; ssh configuration -*- lexical-binding: t -*-
 (require 'tramp)
 
 (tramp-set-completion-function "ssh"
