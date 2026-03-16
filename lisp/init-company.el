@@ -5,7 +5,7 @@
 
 (when (maybe-require-package 'company)
   (add-hook 'after-init-hook 'global-company-mode)
-  (after-load 'company
+  (with-eval-after-load 'company
     (diminish 'company-mode "CMP")
     (define-key company-mode-map (kbd "M-/") 'company-complete)
     (define-key company-active-map (kbd "M-/") 'company-other-backend)
@@ -29,8 +29,8 @@
 
 ;; Suspend page-break-lines-mode while company menu is active
 ;; (see https://github.com/company-mode/company-mode/issues/416)
-(after-load 'company
-  (after-load 'page-break-lines
+(with-eval-after-load 'company
+  (with-eval-after-load 'page-break-lines
     (defvar sanityinc/page-break-lines-on-p nil)
     (make-variable-buffer-local 'sanityinc/page-break-lines-on-p)
 

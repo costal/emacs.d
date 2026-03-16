@@ -47,7 +47,7 @@
 (when (file-exists-p bib-custom-file)
   (load bib-custom-file))
 
-;; (after-load 'ivy
+;; (with-eval-after-load 'ivy
 ;;   (ivy-add-actions
 ;;    'ivy-bibtex
 ;;    '(("i" ivy-bibtex-insert-bibtex "Insert citation"))))

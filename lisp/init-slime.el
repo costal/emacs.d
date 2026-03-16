@@ -15,7 +15,7 @@
   "Mode setup function for slime lisp buffers."
   (set-up-slime-hippie-expand))
 
-(after-load 'slime
+(with-eval-after-load 'slime
   (setq slime-protocol-version 'ignore)
   (setq slime-net-coding-system 'utf-8-unix)
   (let ((extras (when (require 'slime-company nil t)
@@ -34,9 +34,9 @@
   (set-up-slime-hippie-expand)
   (setq show-trailing-whitespace nil))
 
-(after-load 'slime-repl
+(with-eval-after-load 'slime-repl
   ;; Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '('
-  (after-load 'paredit
+  (with-eval-after-load 'paredit
     (define-key slime-repl-mode-map (read-kbd-macro paredit-backward-delete-key) nil))
 
   ;; Bind TAB to `indent-for-tab-command', as in regular Slime buffers.
