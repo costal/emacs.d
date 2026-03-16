@@ -1,125 +1,93 @@
-[![Build Status](https://github.com/purcell/emacs.d/workflows/CI/badge.svg)](https://github.com/purcell/emacs.d/actions)
-<a href="https://www.patreon.com/sanityinc"><img alt="Support me" src="https://img.shields.io/badge/Support%20Me-%F0%9F%92%97-ff69b4.svg"></a>
-
 # A reasonable Emacs config
 
-This is my emacs configuration tree, continually used and tweaked
-since 2000, and it may be a good starting point for other Emacs
-users, especially web developers. These days it's
-somewhat geared towards OS X, but it is known to also work on Linux
-and Windows.
+This configuration is a fork of [Steve Purcell's emacs.d](https://github.com/purcell/emacs.d). It is split into many init modules and supports an **install mode** so you can run a smaller subset (e.g. text-only or programming-only).
 
-Emacs itself comes with support for many programming languages. This
-config adds improved defaults and extended support for the following, listed
-in the approximate order of how much I use them, from most to least:
+## Completion and navigation
 
-* Haskell / Purescript / Elm / OCaml
-* Ruby / Ruby on Rails
-* SQL
-* CSS / LESS / SASS / SCSS
-* Javascript / Typescript
-* HTML / HAML / Markdown / Textile / ERB
-* Common Lisp (with Slime)
-* Python
-* Rust
-* Clojure (with Cider and nRepl)
-* PHP
-* Erlang
+* **Minibuffer**: [Ivy](https://github.com/abo-abo/swiper) and [Counsel](https://github.com/abo-abo/swiper) for finding buffers, files, commands, and more.
+* **In-buffer completion**: [Company](https://company-mode.github.io/) for completion at point, with optional company-quickhelp.
 
-Included is a nice setup for in-buffer autocompletion with
-[corfu](https://github.com/minad/corfu), and minibuffer completion using
-[vertico](https://github.com/minad/vertico).
+## Syntax checking
 
-`flymake` (re-using backends from [flycheck](http://www.flycheck.org))
-is used to immediately highlight syntax errors in Ruby, Python,
-Javascript, Haskell and a number of other languages.
+[Flycheck](http://www.flycheck.org) is used to highlight syntax and lint errors on the fly in supported languages (e.g. Ruby, Python, JavaScript, and others). Optional flycheck-color-mode-line is supported.
 
-LSP support is provided using `eglot`.
+## Themes and appearance
 
-Various popular Emacs tools are included and configured here, such as
-`magit`, `docker.el`, `projectile`, `org-mode` etc., but the focus is moderate
+* Default theme: **sanityinc-tomorrow-bright** (dark). Custom themes `sanityinc-tomorrow` and `sanityinc-solarized` are installed.
+* Commands `light` and `dark` switch between light and dark themes.
+* [dimmer](https://github.com/gaida/dimmer) dims inactive windows.
+* Customization is stored in `custom.el` in the config directory.
 
-## Supported Emacs versions
+## Install mode
 
-Use the latest released Emacs version available to you. The author
-typically uses the latest stable version.
+In `init.el`, set:
 
-The config should run on Emacs 27.1 or greater and is designed to
-degrade smoothly - see the CI build - but many enhancements may be
-unavailable if your Emacs is too old, and in general you should try
-to use the latest stable Emacs release like I do.
+```el
+(setq install-mode "full")   ; or "text" or "programming"
+```
 
-## Other requirements
+* **full**: All language and feature modules (default).
+* **text**: Skips programming-only modules (e.g. nxml, html, python, cc-mode, multi-term) but still loads org, markdown, tex, blog, etc.
+* **programming**: Skips text-oriented modules (markdown, tex, company-math, blog).
 
-To make the most of the programming language-specific support in this
-config, further programs will likely be required, particularly those
-that flycheck or flymake use to provide on-the-fly syntax checking.
+Language and feature support is loaded according to this mode (see the `when (not (string-equal install-mode ...))` blocks in `init.el`).
+
+## Main tools and features
+
+* **Version control**: [Magit](https://magit.vc/) (e.g. `C-x g`), git-modes, git-link, optional git-timemachine and magit-todos.
+* **Projects**: [Projectile](https://github.com/bbatsov/projectile) (completion via Ivy).
+* **Org-mode**: Agenda, GTD-style setup, clocking, store/link keys (`C-c l`, `C-c a`, `C-c o`).
+* **Sessions**: Desktop and session packages to restore buffers on restart.
+* **Other**: Dired, Neotree, Deft, code-library, yasnippet, compile, CSV, Ledger, dash, folding, and others.
+
+## Language and format support (when loaded by install mode)
+
+Representative support (via init-*.el modules) includes:
+
+* **Markup / docs**: HTML (nxml), Markdown, Tex/LaTeX, Org, Deft, blog.
+* **Languages**: C/C++ (cc-mode), Python, YAML, Lisp (Emacs Lisp, Paredit), Common Lisp (Slime), and related tooling.
+* **Other**: CSV, Ledger, spelling (when `*spell-check-support-enabled*` is t).
+
+Additional language modules exist in `lisp/` (e.g. Rust, Ruby, Haskell, JavaScript, Clojure, etc.) but are not required from the main `init.el`; you can `(require 'init-<name>)` in `init-local.el` or add them to `init.el` if you want them.
+
+## Requirements
+
+* **Emacs**: 27.1 or newer (28.1+ recommended). The config degrades on older versions.
+* **Packages**: Installed automatically from MELPA on first run. For language-specific checks, external tools used by Flycheck may be required.
 
 ## Installation
 
-To install, clone this repo to `~/.emacs.d`, i.e. ensure that the
-`init.el` contained in this repo ends up at `~/.emacs.d/init.el`:
+Clone this repo so that `init.el` is at `~/.emacs.d/init.el`:
 
+```bash
+git clone <your-repo-url> ~/.emacs.d
 ```
-git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
-```
 
-Upon starting up Emacs for the first time, further third-party
-packages will be automatically downloaded and installed. If you
-encounter any errors at that stage, try restarting Emacs, and possibly
-running `M-x package-refresh-contents` before doing so.
-
+Start Emacs; packages will be installed on first run. If needed, run `M-x package-refresh-contents` and restart.
 
 ## Updates
 
-Update the config with `git pull`. You'll probably also want/need to
-update the third-party packages regularly too, because that's what I
-do, and the config assumes it:
+* Pull config changes: `git pull`.
+* Update packages: `M-x package-list-packages`, then `U` and `x`.
+* Restart Emacs after pulling or upgrading so sessions and packages apply correctly.
 
-<kbd>M-x package-list-packages</kbd>, then <kbd>U</kbd> followed by <kbd>x</kbd>.
+## Customization
 
-You should usually restart Emacs after pulling changes or updating
-packages so that they can take effect. Emacs should usually restore
-your working buffers when you restart due to this configuration's use
-of the `desktop` and `session` packages.
+* **Personal settings**: Use `M-x customize` / `M-x customize-themes`, and/or edit:
+  * `lisp/init-local.el` — loaded at the end of startup (create it if missing).
+  * `lisp/init-preload-local.el` — loaded early, before most feature modules (optional).
+* **Spell checking**: Set `*spell-check-support-enabled*` in `init.el` (default is `t`).
+* **Install mode**: Set `install-mode` in `init.el` to `"full"`, `"text"`, or `"programming"` as above.
 
-## Changing themes and adding your own customization
-
-To add your own customization, use <kbd>M-x customize</kbd>, <kbd>M-x
-customize-themes</kbd> etc. and/or create a file
-`~/.emacs.d/lisp/init-local.el` which looks like this:
+Example `lisp/init-local.el`:
 
 ```el
-... your code here ...
-
+;; your code here ...
 (provide 'init-local)
 ```
 
-If you need initialisation code which executes earlier in the startup process,
-you can also create an `~/.emacs.d/lisp/init-preload-local.el` file.
+Custom values from the customize interface are stored in `custom.el` (gitignored).
 
-If you plan to customize things more extensively, you should probably
-just fork the repo and hack away at the config to make it your own!
-Remember to regularly merge in changes from this repo, so that your
-config remains compatible with the latest package and Emacs versions.
+---
 
-*Please note that I cannot provide support for customised versions of
-this configuration.*
-
-## Support / issues
-
-If you hit any problems, please first ensure that you are using the latest version
-of this code, and that you have updated your packages to the most recent available
-versions (see "Updates" above). If you still experience problems, go ahead and
-[file an issue on the github project](https://github.com/purcell/emacs.d).
-
--Steve Purcell
-
-<hr>
-
-
-[💝 Support this project and my other Open Source work](https://www.patreon.com/sanityinc)
-
-[💼 LinkedIn profile](https://uk.linkedin.com/in/stevepurcell)
-
-[✍ sanityinc.com](http://www.sanityinc.com/)
+Based on [purcell/emacs.d](https://github.com/purcell/emacs.d).
