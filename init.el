@@ -116,9 +116,10 @@
 ;;  (require 'init-csharp)
 ;;  (require 'init-matlab-mode)
 ;;  (require 'init-arduino))
+  )
 
-(when (not *is-a-windows*)
-  (require 'init-multi-term))
+  (when (not *is-a-windows*)
+    (require 'init-multi-term)))
 
 (require 'init-yaml)
 (require 'init-paredit)
