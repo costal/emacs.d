@@ -140,6 +140,7 @@
 (when (not (string-equal install-mode "programming"))
   (require 'init-markdown)
   (require 'init-tex)
+  (require 'init-org-roam)
   ;; (require 'init-ac-math)
   (require 'init-company-math)
 ;;  (require 'init-mail)

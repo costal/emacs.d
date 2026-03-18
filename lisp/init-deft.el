@@ -3,7 +3,7 @@
 (require-package 'deft)
 
 (setq deft-extensions '("org" "gpg"))
-(setq deft-directory "~/Dropbox/OrgNotes")
+(setq deft-directory "~/Documents/OrgNotes")
 (setq deft-text-mode 'org-mode)
 
 ;; Enable subdirectories search
