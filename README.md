@@ -55,6 +55,53 @@ Additional language modules exist in `lisp/` (e.g. Rust, Ruby, Haskell, JavaScri
 * **Emacs**: 27.1 or newer (28.1+ recommended). The config degrades on older versions.
 * **Packages**: Installed automatically from MELPA on first run. For language-specific checks, external tools used by Flycheck may be required.
 
+## Emacs build
+
+### System dependencies (Debian/Ubuntu)
+
+Install the libraries and headers needed for the Emacs build:
+
+```bash
+sudo apt update
+sudo apt install -y \
+  build-essential \
+  libgtk-3-dev \
+  libcairo2-dev \
+  libgccjit-10-dev \
+  imagemagick \
+  libmagickwand-dev \
+  libmagickcore-dev \
+  libtree-sitter-dev \
+  libtree-sitter0 \
+  sqlite3 \
+  libsqlite3-dev \
+  libmailutils-dev \
+  libxml2-dev \
+  libgif-dev \
+  libpng-dev \
+  libjpeg-dev \
+  libaspell-dev
+```
+
+### Configure and build
+
+This configuration is intended for an Emacs built with the following `./configure` options (native compilation AOT, tree-sitter, and the listed libraries/toolkits):
+
+```bash
+./configure --with-native-compilation=aot \
+            --with-tree-sitter \
+            --with-modules \
+            --with-threads \
+            --with-mailutils \
+            --with-imagemagick \
+            --without-xaw3d \
+            --with-x-toolkit=gtk3 \
+            --without-toolkit-scroll-bars \
+            --with-cairo
+```
+
+Build Emacs from source with these options if you want the same environment; some packages (e.g. tree-sitter) depend on the corresponding support in the binary.
+
 ## Installation
 
 Clone this repo so that `init.el` is at `~/.emacs.d/init.el`:
