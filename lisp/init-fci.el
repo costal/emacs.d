@@ -17,25 +17,29 @@
 (defvar sanityinc/fci-mode-suppressed nil)
 (make-variable-buffer-local 'sanityinc/fci-mode-suppressed)
 
-(defadvice popup-create (before suppress-fci-mode activate)
+(defun suppress-fci-mode (_popup &rest _args)
   "Suspend fci-mode while popups are visible"
   (let ((fci-enabled (sanityinc/fci-enabled-p)))
     (when fci-enabled
       (setq sanityinc/fci-mode-suppressed fci-enabled)
       (turn-off-fci-mode))))
-(defadvice popup-delete (after restore-fci-mode activate)
+(advice-add 'popup-create :before #'suppress-fci-mode)
+
+(defun restore-fci-mode (&rest _args)
   "Restore fci-mode when all popups have closed"
   (when (and sanityinc/fci-mode-suppressed
              (null popup-instances))
     (setq sanityinc/fci-mode-suppressed nil)
     (turn-on-fci-mode)))
+(advice-add 'popup-delete :after #'restore-fci-mode)
 
 ;; Regenerate fci-mode line images after switching themes
-(defadvice enable-theme (after recompute-fci-face activate)
+(defun recompute-fci-face (&rest _args)
   (dolist (buffer (buffer-list))
     (with-current-buffer buffer
       (when (sanityinc/fci-enabled-p)
         (turn-on-fci-mode)))))
+(advice-add 'enable-theme :after #'recompute-fci-face)
 
 ;; Fix misalignment for company completion with fci-mode on
 (defvar-local company-fci-mode-on-p nil)
