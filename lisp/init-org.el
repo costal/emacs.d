@@ -22,6 +22,46 @@
 
 ;;; Code:
 
+(defun sanityinc/ensure-org-from-gnu-elpa ()
+  "Ensure `org' is installed/upgraded from GNU ELPA.
+
+This is intended to keep Org flowing from `elpa.gnu.org' instead of
+depending on other archives or the built-in Org version."
+  (let ((saved-package-archives package-archives)
+        (saved-package-archive-contents package-archive-contents)
+        (saved-package-install-confirm (when (boundp 'package-install-confirm)
+                                        package-install-confirm)))
+    (unwind-protect
+        (progn
+          ;; Only consult GNU ELPA while selecting an Org version.
+          (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")))
+          ;; Avoid interactive prompts during startup (Emacs 28+).
+          (when (boundp 'package-install-confirm)
+            (setq package-install-confirm nil))
+          (condition-case err
+              (progn
+                (package-refresh-contents)
+                (let* ((known (cdr (assoc 'org package-archive-contents)))
+                       (best (car (sort known (lambda (a b)
+                                                (version-list-<= (package-desc-version b)
+                                                                 (package-desc-version a)))))))
+                  (when best
+                    ;; Install only if the installed version is older.
+                    (unless (package-installed-p 'org (package-desc-version best))
+                      (package-install best))
+                    (require 'org))))
+            (error
+             (message "Could not refresh GNU ELPA / install Org: %S" err)
+             (require 'org)))))
+      ;; Restore previous archive settings so other packages behave normally.
+      (setq package-archives saved-package-archives)
+      ;; Clear cached contents (so subsequent package installs use the restored archives).
+      (setq package-archive-contents nil)
+      (when (boundp 'package-install-confirm)
+        (setq package-install-confirm saved-package-install-confirm))))
+
+(sanityinc/ensure-org-from-gnu-elpa)
+
 (when *is-a-mac*
   (maybe-require-package 'grab-mac-link))
 
