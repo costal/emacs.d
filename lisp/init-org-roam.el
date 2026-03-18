@@ -23,8 +23,20 @@
   "Subdir of org-roam-directory for bibliography notes (citekey.org).")
 
 ;; ---------------------------------------------------------------------------
-;; 2. Packages (load order: org-roam -> org-roam-bibtex -> citar -> citar-org-roam -> org-noter)
+;; 2. Packages (load order: emacsql backend -> org-roam -> org-roam-bibtex -> citar -> ...)
 ;; ---------------------------------------------------------------------------
+;; EmacsSQL SQLite backend (required before org-roam).
+;; sqlite-builtin is part of the main emacsql package (not a separate MELPA package).
+(require-package 'emacsql)
+(if (>= emacs-major-version 29)
+    (progn
+      (setq org-roam-database-connector 'sqlite-builtin)
+      (require 'emacsql-sqlite-builtin))
+  (progn
+    (require-package 'emacsql-sqlite)
+    (setq org-roam-database-connector 'sqlite)
+    (require 'emacsql-sqlite)))
+
 (require-package 'org-roam)
 (require-package 'org-roam-bibtex)
 (require-package 'citar)
