@@ -77,6 +77,8 @@
 (require 'init-uniquify)
 (require 'init-ibuffer)
 (require 'init-flycheck)
+(require-package 'treesit-auto)
+(require 'init-treesitter)
 
 (require 'init-recentf)
 (require 'init-smex)
