@@ -105,6 +105,7 @@
 (require 'init-org)
 (require 'init-deft)
 (require 'init-code)
+(require 'init-agent-shell)
 
 (require 'init-yasnippet)
 
