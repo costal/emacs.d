@@ -92,6 +92,15 @@ depending on other archives or the built-in Org version."
       org-tags-column 80)
 
 
+;;; Org directories and agenda files
+(setq org-default-notes-file (expand-file-name "inbox.org" org-directory))
+(setq org-agenda-files
+      (list (expand-file-name "inbox.org" org-directory)
+            (expand-file-name "tasks.org" org-directory)
+            (expand-file-name "notes.org" org-directory)
+            (expand-file-name "journal.org" org-directory)))
+
+
 ;; Lots of stuff from http://doc.norang.ca/org-mode.html
 
 ;; Re-align tags when window shape changes
@@ -151,11 +160,16 @@ typical word processor."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-capture-templates
-      `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
-         "* NEXT %?\n%U\n" :clock-resume t)
-        ("n" "note" entry (file "")
+      `(("t" "todo" entry (file "")
+         "* TODO %?\n%U\n%a\n" :clock-resume t)
+        ("n" "note" entry (file ,(expand-file-name "notes.org" org-directory))
          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
-        ))
+        ("j" "journal" entry (file+olp+datetree ,(expand-file-name "journal.org" org-directory))
+         "* %?\n%U\n" :clock-resume t)
+        ("m" "meeting" entry (file ,(expand-file-name "notes.org" org-directory))
+         "* MEETING %? :MEETING:\n%U\n" :clock-resume t)
+        ("l" "link" entry (file ,(expand-file-name "notes.org" org-directory))
+         "* %? :LINK:\n%U\n%a\n" :clock-resume t)))
 
 
 
