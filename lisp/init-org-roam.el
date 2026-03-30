@@ -85,26 +85,7 @@
 ;; ---------------------------------------------------------------------------
 (with-eval-after-load 'citar
   (setq citar-bibliography sanityinc/citar-bibliography
-        citar-library-paths sanityinc/citar-library-paths)
-  ;; Open PDFs: reuse same style as init-tex (evince on Linux, etc.) when available
-  (when (boundp 'bibtex-completion-pdf-open-function)
-    (setq citar-open-pdf-function
-          (lambda (key)
-            (when (fboundp 'citar-get-file)
-              (let ((path (citar-get-file key)))
-                (when path (funcall bibtex-completion-pdf-open-function path))))))
-    (setq citar-open-files-function
-          (lambda (key)
-            (when (fboundp 'citar-get-file)
-              (let ((path (citar-get-file key)))
-                (when path (funcall bibtex-completion-pdf-open-function path)))))))
-  ;; Fallback when init-tex not loaded: open PDF in Emacs
-  (unless citar-open-pdf-function
-    (setq citar-open-pdf-function
-          (lambda (key)
-            (when (fboundp 'citar-get-file)
-              (let ((path (citar-get-file key)))
-                (when path (find-file path))))))))
+        citar-library-paths sanityinc/citar-library-paths))
 
 (with-eval-after-load 'citar
   (setq citar-at-point-function 'citar-citation-at-point))
@@ -172,8 +153,7 @@
 ;; ---------------------------------------------------------------------------
 ;; 11. pdf-tools for org-noter (better PDF sync)
 ;; ---------------------------------------------------------------------------
-(with-eval-after-load 'pdf-tools
-  (pdf-loader-install))
+(pdf-loader-install)
 
 ;; ---------------------------------------------------------------------------
 ;; 12. Keybindings (C-c r = roam combo; C-c r b = Citar open)
