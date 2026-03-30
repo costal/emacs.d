@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 (require-package 'code-library)
 
-(setq code-library-directory "~/Dropbox/OrgNotes/CodeLibrary/")
+(setq code-library-directory (expand-file-name "code-library/" org-directory))
 (setq code-library-mode-file-alist
       '((c-mode . "c_cpp.org")
         (c++-mode . "c_cpp.org")
