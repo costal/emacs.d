@@ -20,6 +20,7 @@
 
 (setq ad-redefinition-action 'accept) ;; ignore the redefinition warning
 (setq debug-on-error nil) ;; turn off debug-on-error
+(setq-default tab-width 4)
 
 ;;----------------------------------------------------------------------------
 ;; Set installation mode: text, programming, full
@@ -114,6 +115,7 @@
   (require 'init-html)
   (require 'init-python-mode)
   (require 'init-cc-mode)
+  (require 'init-go)
   (when *is-a-linux*
 ;;    (require 'init-ros))
 ;;  (require 'init-csharp)
