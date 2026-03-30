@@ -10,9 +10,10 @@
 ;; ---------------------------------------------------------------------------
 (defvar sanityinc/org-roam-directory (expand-file-name "~/org/roam")
   "Root directory for org-roam notes.")
-(defvar sanityinc/citar-bibliography (list (expand-file-name "~/references/references.bib"))
+(defvar sanityinc/citar-bibliography (list (expand-file-name "~/Documents/references/references.bib"))
   "BibTeX files for Citar. Match bibtex-completion-bibliography if using both.")
-(defvar sanityinc/citar-library-paths (list (expand-file-name "~/references/papers"))
+(defvar sanityinc/citar-library-paths (list (expand-file-name "~/Documents/references/papers")
+                                            (expand-file-name "~/Documents/Books"))
   "Directories where PDFs live. Match bibtex-completion-library-path if using both.")
 
 (setq org-roam-directory (file-truename sanityinc/org-roam-directory))
