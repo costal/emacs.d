@@ -20,6 +20,7 @@
 
 (setq ad-redefinition-action 'accept) ;; ignore the redefinition warning
 (setq debug-on-error nil) ;; turn off debug-on-error
+(setq-default tab-width 4)
 
 ;;----------------------------------------------------------------------------
 ;; Set installation mode: text, programming, full
@@ -77,6 +78,8 @@
 (require 'init-uniquify)
 (require 'init-ibuffer)
 (require 'init-flycheck)
+(require-package 'treesit-auto)
+(require 'init-treesitter)
 
 (require 'init-recentf)
 (require 'init-smex)
@@ -103,6 +106,7 @@
 (require 'init-org)
 (require 'init-deft)
 (require 'init-code)
+(require 'init-agent-shell)
 
 (require 'init-yasnippet)
 
@@ -111,6 +115,7 @@
   (require 'init-html)
   (require 'init-python-mode)
   (require 'init-cc-mode)
+  (require 'init-go)
   (when *is-a-linux*
 ;;    (require 'init-ros))
 ;;  (require 'init-csharp)
@@ -140,6 +145,7 @@
 (when (not (string-equal install-mode "programming"))
   (require 'init-markdown)
   (require 'init-tex)
+  (require 'init-org-roam)
   ;; (require 'init-ac-math)
   (require 'init-company-math)
 ;;  (require 'init-mail)
